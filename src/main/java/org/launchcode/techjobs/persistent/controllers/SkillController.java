@@ -14,17 +14,17 @@ import java.util.Optional;
 
 
 @Controller
-@RequestMapping("employers")
+@RequestMapping("skills")
 public class SkillController {
         @Autowired
         private SkillRepository skillRepository;
 
 
-        @GetMapping("index")
+        @GetMapping("")
         public String index(Model model) {
             model.addAttribute("title", "All Employers");
             model.addAttribute("skill", skillRepository.findAll())  ;
-            return "skills";
+            return "skills/index";
         }
 
         @GetMapping("add")
@@ -40,18 +40,18 @@ public class SkillController {
             if (errors.hasErrors()) {
                 return "skills/add";
             }
-
+            skillRepository.save(newSkill);
             return "redirect:";
         }
 
-        @GetMapping("view/{employerId}")
-        public String displayViewSkill(Model model, @PathVariable int employerId) {
+        @GetMapping("view/{skillId}")
+        public String displayViewSkill(Model model, @PathVariable int skillId) {
 
-            Optional optEmployer = null;
-            if (optEmployer.isPresent()) {
-                Employer employer = (Employer) optEmployer.get();
-                model.addAttribute("employer", employer);
-                return "employers/view";
+            Optional optSkill = skillRepository.findById(skillId);
+            if (optSkill.isPresent()) {
+                Skill skill = (Skill) optSkill.get();
+                model.addAttribute("skill", skill);
+                return "skills/view";
             } else {
                 return "redirect:../";
             }

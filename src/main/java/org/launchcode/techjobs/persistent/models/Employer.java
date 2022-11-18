@@ -22,7 +22,7 @@ public class Employer extends AbstractEntity {
 
     @OneToMany
     @JoinColumn(name = "employer_id")
-    public final List<Job> jobs = new ArrayList<>();
+    private final List<Job> jobs = new ArrayList<>();
     public String getLocation() {
         return location;
     }

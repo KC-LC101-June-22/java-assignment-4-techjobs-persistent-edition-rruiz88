@@ -15,7 +15,7 @@ public abstract class AbstractEntity {
     private int id;
 
     @NotBlank
-    @Size(max = 60)
+    @Size(min=1,max = 60, message = "Name cannot be greater than 60 characters")
     private String name;
 
     public int getId() {

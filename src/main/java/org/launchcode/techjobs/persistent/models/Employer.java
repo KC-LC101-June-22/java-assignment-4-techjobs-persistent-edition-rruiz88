@@ -13,7 +13,7 @@ import java.util.List;
 public class Employer extends AbstractEntity {
 
     @NotBlank
-    @Size(max = 60)
+    @Size(min = 1, max = 60, message = "Location cannot be greater than 60 characters")
 
     public String location;
 
